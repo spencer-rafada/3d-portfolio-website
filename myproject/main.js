@@ -66,7 +66,7 @@ const spaceTexture = new THREE.TextureLoader().load('galaxy.jpg')
 scene.background = spaceTexture;
 
 // Avatar
-const spencerTexture = 
+//const spencerTexture = 
 
 // Animate through Recursion
 function animate()
