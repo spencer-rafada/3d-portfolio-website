@@ -25,11 +25,15 @@ renderer.render(scene, camera);
 // When creating an object you need:
 // geometry, material, mesh = geometry + material (one to be add on scene)
 // TorusKnot: https://threejs.org/docs/index.html#api/en/geometries/TorusKnotGeometry
-const geometry = new THREE.TorusKnotGeometry(6.9, 3, 250, 14);
-const material = new THREE.MeshStandardMaterial({color: 0x049EF4});
-const torusknot = new THREE.Mesh(geometry, material);
+const geometry = new THREE.TorusGeometry(20, 4, 16, 100);
+const material = new THREE.MeshStandardMaterial({color: 0x031635});
+const outerRing = new THREE.Mesh(geometry, material);
 
-scene.add(torusknot);
+const geometry2 = new THREE.TorusGeometry(11, 4, 16, 100);
+const material2 = new THREE.MeshStandardMaterial({color: 0x073e97});
+const innerRing = new THREE.Mesh(geometry2, material2);
+
+scene.add(innerRing, outerRing);
 
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(20,20,5);
@@ -59,7 +63,7 @@ function addStar()
 }
 
 // Adding Star in Scene
-Array(300).fill().forEach(addStar)
+Array(500).fill().forEach(addStar)
 
 // Background
 const spaceTexture = new THREE.TextureLoader().load('galaxy.jpg')
@@ -73,9 +77,13 @@ function animate()
 {
   requestAnimationFrame(animate);
   // Torus Rotations
-  torusknot.rotation.x += 0.005;
-  torusknot.rotation.y += 0.005;
-  torusknot.rotation.z += 0.01;
+  outerRing.rotation.x += 0.005;
+  outerRing.rotation.y -= 0.005;
+  outerRing.rotation.z += 0.01;
+
+  innerRing.rotation.x -= 0.003;
+  innerRing.rotation.y += 0.009;
+  innerRing.rotation.z -= 0.04;
 
   controls.update();
 
