@@ -70,7 +70,33 @@ const spaceTexture = new THREE.TextureLoader().load('galaxy.jpg')
 scene.background = spaceTexture;
 
 // Avatar
-//const spencerTexture = 
+const spencerTexture = new THREE.TextureLoader().load('avatar.jpg')
+//                                 geometry,                    material
+const spencer = new THREE.Mesh(new THREE.BoxGeometry(4, 4, 4), new THREE.MeshBasicMaterial({map: spencerTexture}))
+
+scene.add(spencer)
+// You can change the position by:
+// position.x = 30; or position.setX(value)
+spencer.position.z = -5
+spencer.position.x = 4
+
+// TODO: Add Moon with MeshStandardMaterial
+
+// Function moveCamera
+function moveCamera()
+{
+  const t = document.body.getBoundingClientRect().top;
+
+  // Avatar Rotations
+  spencer.rotation.y += 0.005;
+
+  camera.position.z = t * -0.01;
+  camera.position.x = t * -0.0002;
+  camera.position.y = t * -0.0002;
+}
+
+document.body.onscroll = moveCamera
+moveCamera();
 
 // Animate through Recursion
 function animate()
